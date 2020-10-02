@@ -135,43 +135,69 @@
         //   console.log(error);
         // })
 
-        getItemsDocsByCategory("dvfu").then(itemDocs => {
-          console.log(itemDocs.docs);
-        });
+        // getItemsDocsByCategory("dvfu").then(itemDocs => {
+        //   console.log(itemDocs.docs);
+        // });
+
+        createOrder("asdfasd").then(result => {
+          console.log(result.order);
+        })
       };
+
+      function createOrder(userId) {
+        var activeOrders = db.collection("activeOrders")
+
+        return new Promise((resolve, reject) => {
+          let order = {
+            courierId: "",
+            creationTime: new firebase.firestore.Timestamp(1601596810, 0),
+            customers: [userId],
+            deliveryAddress: "",
+            state: 0,
+            items: [],
+            recieveTime: 0
+          };
+
+          activeOrders.add(order).then(doc => {
+            resolve({order: order, id: doc.id})
+          }).catch(error => {
+            reject(error);
+          })
+        })
+      }
+
+      function addItemToOrder() {
+
+      }
 
       function getItemsIn(shopId) {
         var shops = db.collection("shops").doc(shopId);
 
-        let promise = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
           shops.collection("items").get().then(snapshot => {
             resolve(snapshot.docs.map(doc => { return {id: doc.id, itemData: doc.data()} }));
           }).catch(error => {
             reject(error);
           })
-        });
-
-        return promise;
+        });;
       }
 
       function createShop(shopData) {
         var shops = db.collection("shops")
 
-        let promise = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
           shops.add(shopData).then(doc => {
             resolve(doc)
           }).catch(error => {
             reject(error);
           });
         });
-
-        return promise;
       }
 
       function addItemsToShop(shopId, items) {
         var itemsCollection = db.collection("shops").doc(shopId).collection("items");
 
-        let promise = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
           let batch = db.batch()
           items.forEach(item => {
             let doc = itemsCollection.doc()
@@ -184,8 +210,6 @@
             reject(error);
           });
         });
-
-        return promise;
       }
 
 // SERVER SHIT
