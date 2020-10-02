@@ -56,19 +56,167 @@
       });
 
       var db = firebase.firestore();
+      var shops = db.collection("shops");
+      var items = db.collection("items");
 
-      let options = {
-          source: 'server'
-        };
+      function myFunction() {
+        // shops.get().then(snapshot => {
+          // snapshot.forEach(doc => {
+            // console.log(doc.id);
+            // doc.data().allShops.forEach(data => {
+            //   if (data) {
+            //     let doc = items.doc(data.id);
+            //     doc.get({source: "server"}).then(doc => {
+            //       // Item for shop
+            //       console.log(doc.data());
+            //     }).catch(error => {
+            //       console.log(error);
+            //     });
+            //   }
+            // });
+          // })
+        // })
 
-        let doc = db.collection("items").doc("asdswedfbvwe");
-        doc.get(options).then( document => {
-          console.log("item: ", document.data())
-        }).catch(error => {
-          console.log("error", error);
+        // Get items in shop
+        // getItemsIn("3HUvjvozXFhXa3glp7uQ").then(items => {
+        //   console.log(items);
+        // }).catch(error => {
+        //   console.log(error);
+        // });
+
+        // createShop({
+        //   name: "CHLENO-SHOP",
+        //   ownerId: "asdfasdfas",
+        //   itemsAddress: "https://dns.ru",
+        //   categories: ["grocery", "sec toys", "other"]
+        // }).then(doc => {
+        //   console.log('Created doc');
+        //   console.log(doc.id);
+
+        //   addItemsToShop(doc.id, [{
+        //     localId: "weiuqiodifj",
+        //     name: "chainik",
+        //     description: "this is a description",
+        //     price: 100,
+        //     sale: 0,
+        //     images: [],
+        //     category: "grocery"
+        //   },
+        //   {
+        //     localId: "bgrwewert",
+        //     name: "fdsa",
+        //     description: "this is a description",
+        //     price: 100,
+        //     sale: 0,
+        //     images: [],
+        //     category: "sex"
+        //   },
+        //   {
+        //     localId: "ae5543",
+        //     name: "vdsa",
+        //     description: "this is a description",
+        //     price: 100,
+        //     sale: 0,
+        //     images: [],
+        //     category: "dvfu"
+        //   },
+        //   {
+        //     localId: "grew",
+        //     name: "we32",
+        //     description: "this is a description",
+        //     price: 100,
+        //     sale: 0,
+        //     images: [],
+        //     category: "hahathon"
+        //   }])
+        // }).then(() => {
+        //   console.log('Created items');
+        // }).catch(error => {
+        //   console.log(error);
+        // })
+
+        getItemsDocsByCategory("dvfu").then(itemDocs => {
+          console.log(itemDocs.docs);
+        });
+      };
+
+      function getItemsIn(shopId) {
+        var shops = db.collection("shops").doc(shopId);
+
+        let promise = new Promise((resolve, reject) => {
+          shops.collection("items").get().then(snapshot => {
+            resolve(snapshot.docs.map(doc => { return {id: doc.id, itemData: doc.data()} }));
+          }).catch(error => {
+            reject(error);
+          })
         });
 
-        
+        return promise;
+      }
+
+      function createShop(shopData) {
+        var shops = db.collection("shops")
+
+        let promise = new Promise((resolve, reject) => {
+          shops.add(shopData).then(doc => {
+            resolve(doc)
+          }).catch(error => {
+            reject(error);
+          });
+        });
+
+        return promise;
+      }
+
+      function addItemsToShop(shopId, items) {
+        var itemsCollection = db.collection("shops").doc(shopId).collection("items");
+
+        let promise = new Promise((resolve, reject) => {
+          let batch = db.batch()
+          items.forEach(item => {
+            let doc = itemsCollection.doc()
+            doc.set(item);
+          })
+
+          batch.commit().then(() => {
+            resolve();
+          }).catch(error => {
+            reject(error);
+          });
+        });
+
+        return promise;
+      }
+
+// SERVER SHIT
+      // function getItemsDocsByCategory(category) {
+      //   var shops = db.collection("shops")
+
+      //   return new Promise((resolve, reject) => {
+      //       shops.get().then(snapshot => {
+      //         var array = [];
+
+      //         snapshot.forEach(doc => {
+      //           array.push(db.collection("shops").doc(doc.id).collection("items").get());            
+      //         })
+
+      //         Promise.all(array).then(doc => {
+      //           console.log(doc.map(doc => {
+      //             return {
+      //               docs: doc.docs
+      //             }
+      //           }));
+      //           resolve(doc)
+      //         }).catch(error => {
+      //           reject(error)
+      //         })
+      //       })
+      //     });
+      // }
+
+      
+
+      // TODO Parse products list
     </script>
 
     <script></script>
