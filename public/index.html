@@ -196,7 +196,8 @@
 
       function addItemToOrder(orderId, item) {
         var items = db.collection("activeOrders").doc(orderId).collection("items")
-        return new Promise((resolve,reject)=>{resolve(items.add(item)).then(doc => {
+        return new Promise((resolve,reject)=>{
+          resolve(items.add(item)).then(doc => {
           console.log(items); 
         }).catch(error=>{
           reject(error);
