@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Кубик</title>
+	<link rel="stylesheet" href="css/headerStyle.css">
+	<link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+	<!-- Head,logo, search. profile and box -->
+	<header class="header">
+		<div class="headerWrap">
+			<a href="products.html" class="logoWrap">
+				<div class="logoDiv"></div>
+			</a>
+			<div class="searchWrap flexAlignCenter">
+				<span class="searchText ">Что ищем?</span>	
+			</div>
+			<div class="profileWraper flexAlignCenter menu-2">
+				<div class="profileImg"></div>
+				<span class="profilename" id="surname">1</span>
+				<span class="profilename" id="firstName">2</span>
+				<span class="profilename" id="middleName">3</span>
+				<div class="profileNameWraper menu-itm">
+					<ul class="drop-menu">
+						<li class="profileLi">
+							<a href="account.html">Мой аккаунт</a>
+						</li>
+						<li class="profileLi">
+							<a href="userprofile.html">Стать курьером</a>
+						</li>
+						<li class="profileLi profileLiQuit">Выйти</li>
+					</ul>
+				</div>
+			</div>
+			<div class="basketBoxWrap flexAlignCenter">
+				<span class="textBasketBox">
+					<a href="basket.html" title="">Коробка</a>
+				</span>
+				<div class="basketBoxLogo"></div>
+			</div>
+		</div>
+	</header>
+
+
+
+	<!-- Shop, list of products -->
+	<div class="mainBlockShop">
+		<div class="fixed-header-bypass"></div>
+		<span class="mainBlockShopText">Зависит  от выбраного магазина</span>
+		<div class="mainBlockShopContainer">
+			<div class="shopsLists">
+				<ul class="shopList">
+					<li class="shopListsLi choosen">
+					<a href="">Реми</a>
+				</li>
+					<li class="shopListsLi">
+					<a href="">DNS</a>
+				</li>
+					<li class="shopListsLi">
+					<a href="">Хим вещи</a>
+				</li>
+				</ul>
+				<div id="shop1" class="shopListOfProducts">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div>All rights reserved</div>
+	</footer>
+
+	<script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-auth.js"></script>
+    <script src="firebaseWrapper.js"></script>
+
+    <!-- <h1>Каталог</h1>
+    <a href="javascript:history.back()">НАЗАД</a>
+    <div id="items"></div> -->
+
+    <script>
+      var itemsDiv = document.getElementById("shop1")
+      var allItems = []
+
+      firebase.auth().onAuthStateChanged(user => {
+        // addItemToItemOrder({
+        //   localId: "bgrwewert",
+        //   name: "fdsa",
+        //   description: "this is a description",
+        //   price: 100,
+        //   sale: 0,
+        //   images: [],
+        //   category: "sex"
+        // })
+      })
+
+      getAllItems().then(items => {
+        allItems = items
+        var str = ""
+
+        for (var i = 0; i < items.length; i++) {
+          let item = items[i];
+          str += `
+          <div onclick=\"addItemButtonTapped(" + ${i} + ")\" class="shopListProducts">
+          	<div class="img"></div>
+          	<div class="infoOfShopProduct">
+          		<span class="nameOfProduct">${item.name}</span>
+          		<div class="span" style="color: black">${item.description}</div>
+          		<div class="span priceOfProduct">${item.price}</div>
+          	</div>
+          </div>
+
+          `
+          // str += "<h2 style=\"background-color: red\">" + item.name + "</h2><br><h3>" + item.price + "</h3><br><button onclick=\"addItemButtonTapped(" + i + ")\">Добавить в заказ</button><br>";
+          // console.log(item);
+
+          // str += `<h1>${item}</h1>`
+        }
+        itemsDiv.innerHTML = str
+      })
+
+      function addItemButtonTapped(num) {
+        addItemToItemOrder(allItems[num]).then(() => {
+          // success
+        }).catch(error => {
+
+        });
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Кубик</title>
+	<link rel="stylesheet" href="css/headerStyle.css">
+	<link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+	<!-- Head,logo, search. profile and box -->
+	<header class="header">
+		<div class="headerWrap">
+			<a href="products.html" class="logoWrap">
+				<div class="logoDiv"></div>
+			</a>
+			<div class="searchWrap flexAlignCenter">
+				<span class="searchText ">Что ищем?</span>	
+			</div>
+			<div class="profileWraper flexAlignCenter menu-2">
+				<div class="profileImg"></div>
+				<span class="profilename" id="surname">1</span>
+				<span class="profilename" id="firstName">2</span>
+				<span class="profilename" id="middleName">3</span>
+				<div class="profileNameWraper menu-itm">
+					<ul class="drop-menu">
+						<li class="profileLi">
+							<a href="userprofile.html">Мой аккаунт</a>
+						</li>
+						<li class="profileLi">
+							<a href="courier.html">Стать курьером</a>
+						</li>
+						<li class="profileLi profileLiQuit">Выйти</li>
+					</ul>
+				</div>
+			</div>
+			<div class="basketBoxWrap flexAlignCenter">
+				<span class="textBasketBox">
+					<a href="basket.html" title="">Коробка</a>
+				</span>
+				<div class="basketBoxLogo"></div>
+			</div>
+		</div>
+	</header>
+
+
+
+	<!-- Shop, list of products -->
+	<div class="mainBlockShop">
+		<div class="fixed-header-bypass"></div>
+		<div class="courierListWrap">
+			<div class="courierList">
+				<div class="textAndFilter">
+					<span class="textAndFilterSpan">Список заказов:</span>
+					<span class="textAndFilterSpan">Фильтр</span>
+				</div>
+				<div class="order">
+					<span style="font-size: 36px;" class="numberOfOrder">Заказ 1</span>
+					<span class="timeOfOrder">Время: <div class="idForJSTime">18:30</div></span>
+					<span class="placeOfOrder">Место: <div class="idForJSPlace">лаатваттраовра</div></span>
+					<span class="placeOfDifficult">Сложность: <div class="idForJSDifficult">0/10</div></span>
+					<div class="orderConfirm">Принять заказ</div>
+				</div>
+			</div>
+			<div class="courierList">
+				<div class="textAndFilter">
+					<span class="textAndFilterSpan">Принятые заказы:</span>
+					<div class="orderConfirmYet">Подтвердить</div>
+				</div>
+				<div class="order">
+					<span style="font-size: 36px;" class="numberOfOrder">Заказ 1</span>
+					<span class="timeOfOrder">Время: <div class="idForJSTime">18:30</div></span>
+					<span class="placeOfOrder">Место: <div class="idForJSPlace">лаатваттраовра</div></span>
+					<span class="placeOfDifficult">Сложность: <div class="idForJSDifficult">0/10</div></span>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div>All rights reserved</div>
+	</footer>
+</body>
+</html>
