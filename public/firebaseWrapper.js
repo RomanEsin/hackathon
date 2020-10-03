@@ -76,23 +76,24 @@ function getUserFromCollection(user) {
 function addItemToItemOrder(item) {
   let itemOrder = db.collection("itemOrders").doc(firebase.auth().currentUser.uid)
 
-  itemOrder.get().then(doc => {
-    var initArray = {items: []};
+  return new Promise((resolve, reject) => {
+    itemOrder.get().then(doc => {
+      var initArray = {items: []};
 
-    if (doc.data()) {
-      initArray = doc.data();
-    }
+      if (doc.data()) {
+        initArray = doc.data();
+      }
 
-    initArray.items.push(item)
+      initArray.items.push(item)
 
-    itemOrder.set(initArray).then(() => {
-      console.log('Success');
+      itemOrder.set(initArray).then(() => {
+        resolve('Success');
+      }).catch(error => {
+        reject(error);
+      })
     }).catch(error => {
-      console.log(error);
+      reject(error);
     })
-    
-  }).catch(error => {
-    console.log(error);
   })
 }
 
