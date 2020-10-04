@@ -173,7 +173,7 @@ function login() {
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
     console.log('lkshjcfdaoi');
     return firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-      window.location = 'account.html';
+      window.location = 'products.html';
       console.log("pijasdbfiadsnfpasdbn");
     }).catch(function(error) {
       // Handle Errors here.
