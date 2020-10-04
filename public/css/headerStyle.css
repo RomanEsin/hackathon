@@ -323,3 +323,13 @@ footer div{
 	border: 1px solid black;
 	border-radius: 15px;
 }
+@media (min-width: 0) and (max-width: 800px) {
+	.shopList, .profileImg{
+		display: none;
+	}
+	.mainBlockShopText{
+		padding-left: 120px;
+	}
+	.shopListOfProducts{
+		width: 100%;
+	}
