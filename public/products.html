@@ -99,13 +99,15 @@
       })
 
       getAllItems().then(items => {
-        allItems = items
+      	if (items) {
+      		allItems = items
+      	}
         var str = ""
 
         for (var i = 0; i < items.length; i++) {
           let item = items[i];
           str += `
-          <div onclick=\"addItemButtonTapped(" + ${i} + ")\" class="shopListProducts">
+          <div onclick="addItemButtonTapped(${i})" class="shopListProducts">
           	<div class="img"></div>
           	<div class="infoOfShopProduct">
           		<span class="nameOfProduct">${item.name}</span>
@@ -125,9 +127,9 @@
 
       function addItemButtonTapped(num) {
         addItemToItemOrder(allItems[num]).then(() => {
-          // success
+          console.log('Success');
         }).catch(error => {
-
+        	console.log(error);
         });
       }
     </script>
