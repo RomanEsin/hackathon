@@ -324,7 +324,7 @@ footer div{
 	border-radius: 15px;
 }
 @media (min-width: 0) and (max-width: 800px) {
-	.shopList, .profileImg{
+	.shopList, .profileImg, .textBasketBox{
 		display: none;
 	}
 	.mainBlockShopText{
