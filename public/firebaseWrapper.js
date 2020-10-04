@@ -149,7 +149,7 @@ function createAccount() {
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
       createUserData(firebase.auth().currentUser).then(() => {
         console.log("Did create user");
-        window.location = 'account.html';
+        window.location = 'products.html';
       })
     }).catch(error => {
       // Handle Errors here.
