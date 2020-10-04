@@ -19,7 +19,7 @@
       <div class="container-login100">
         <div class="wrap-login100">
           <div class="login100-pic js-tilt" data-tilt> <img src="images/open.png" alt="IMG"> </div>
-          <form class="login100-form validate-form"> <span class="login100-form-title">
+          <div class="login100-form validate-form"> <span class="login100-form-title">
                 Привет, коробчанин
               </span>
             <div class="wrap-input100 validate-input" data-validate="Пример почты: ex@abc.xyz">
@@ -38,11 +38,11 @@
                 </span> <a class="txt2" href="#">
                   Логин / Пароль?
                 </a> </div>
-            <div onclick="createAccount()" class="text-center p-t-136"> <a class="txt2" href="#">
+            <div onclick="createAccount()" class="text-center p-t-136"> <div class="txt2">
                   Создать аккаунт
                   <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                </a> </div>
-          </form>
+                </div> </div>
+          </div>
         </div>
       </div>
     </div>
@@ -54,7 +54,9 @@
     <!-- <button onclick="logout()">Logout</button> -->
 
     <script>
-      setup();
+      firebase.auth().signOut().then(() => {
+        console.log('did sign out');
+      })
     </script>
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

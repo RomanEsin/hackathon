@@ -8,6 +8,7 @@ var db = firebase.firestore();
 var currentUserData = {};
 
 function setup() {
+  // console.log(firebase);
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       // console.log(user);
@@ -80,8 +81,8 @@ function addItemToItemOrder(item) {
     itemOrder.get().then(doc => {
       var initArray = {items: []};
 
-      if (doc.data()) {
-        initArray = doc.data();
+      if (doc.data().items) {
+        initArray.items = doc.data().items;
       }
 
       initArray.items.push(item)
@@ -170,8 +171,10 @@ function login() {
   console.log('asdfdsaf');
 
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+    console.log('lkshjcfdaoi');
     return firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
       window.location = 'account.html';
+      console.log("pijasdbfiadsnfpasdbn");
     }).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
